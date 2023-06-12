@@ -31,7 +31,7 @@ jobs:
       - name: Set pending status
         env: 
           GH_REPO: ${{ github.event.repository.full_name }}
-          GH_TOKEN: ${{ secrets.STATUS_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
           URL: /repos/{owner}/{repo}/statuses/${{ steps.commit-sha.outputs.commit-sha }}
         run: |
           gh api \
@@ -60,7 +60,7 @@ jobs:
       - name: Set success status
         env: 
           GH_REPO: ${{ github.event.repository.full_name }}
-          GH_TOKEN: ${{ secrets.STATUS_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
           URL: /repos/{owner}/{repo}/statuses/${{ needs.foo.outputs.commit-sha }}
         run: |
           gh api \
