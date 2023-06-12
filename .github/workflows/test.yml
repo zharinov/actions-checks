@@ -17,10 +17,13 @@ jobs:
       
   bar:
     needs: foo
-    runs-on: 'ubuntu-latest'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: ['ubuntu-latest', 'windows-latest', 'macos-latest']
     steps:
-      - run: echo 'Bar'
-      
+      - run: sleep 10
+
   baz:
     needs: bar
     runs-on: 'ubuntu-latest'
