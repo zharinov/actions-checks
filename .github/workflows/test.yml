@@ -1,0 +1,28 @@
+name: build
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  foo:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - run: echo 'Foo'
+      
+  bar:
+    needs: foo
+    runs-on: 'ubuntu-latest'
+    steps:
+      - run: echo 'Bar'
+      
+  baz:
+    needs: bar
+    runs-on: 'ubuntu-latest'
+    steps:
+      - run: echo 'Baz'
