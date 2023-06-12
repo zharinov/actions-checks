@@ -28,7 +28,9 @@ jobs:
 
       - name: Set pending status
         env: 
-          URL: /repos/renovate-testing/action-checks/statuses/${{ steps.commit-sha.outputs.commit-sha }}
+          GH_REPO: ${{ github.event.repository.full_name }}
+          GH_TOKEN: ${{ github.token }}
+          URL: /repos/{owner}/{repo}/statuses/${{ steps.commit-sha.outputs.commit-sha }}
         run: |
           gh api \
             --method POST \
@@ -53,7 +55,9 @@ jobs:
     steps:
       - name: Set success status
         env: 
-          URL: /repos/renovate-testing/action-checks/statuses/${{ needs.foo.outputs.commit-sha }}
+          GH_REPO: ${{ github.event.repository.full_name }}
+          GH_TOKEN: ${{ github.token }}
+          URL: /repos/{owner}/{repo}/statuses/${{ steps.commit-sha.outputs.commit-sha }}
         run: |
           gh api \
             --method POST \
